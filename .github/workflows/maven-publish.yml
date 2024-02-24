@@ -27,15 +27,16 @@ jobs:
       - name: Run tests
         run: mvn test
 
-  deploy:
+  build-docker:
     needs: build
     runs-on: ubuntu-latest
     if: success()
 
     steps:
-      - name: Deploy to production
-        # Add your deployment script or command here
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
         run: |
-          echo "Deploying to production..."
-          # Add your deployment commands here
+          docker build -t your-docker-image-name:latest .
 
